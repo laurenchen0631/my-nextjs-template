@@ -1,0 +1,12 @@
+{
+  "editor.renderWhitespace": "all",
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
+  "editor.tabSize": 2,
+  "typescript.locale": "en",
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+
+  "i18n-ally.localesPaths": ["public/locales"],
+  "i18n-ally.sourceLanguage": "zh-tw",
+  "i18n-ally.keystyle": "nested"
+}
