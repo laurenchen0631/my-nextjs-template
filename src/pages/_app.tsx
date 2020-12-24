@@ -15,7 +15,12 @@ const resources = {
   },
 };
 
-i18n.use(initReactI18next).init({resources});
+i18n.use(initReactI18next).init({
+  resources,
+  interpolation: {
+    escapeValue: false, // react already safes from xss
+  },
+});
 
 function MyApp({Component, pageProps}: AppProps): JSX.Element {
   const {locale} = useRouter();

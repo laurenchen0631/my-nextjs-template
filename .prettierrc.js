@@ -5,13 +5,6 @@ module.exports = {
   trailingComma: 'all',
   printWidth: 100,
   tabWidth: 2,
-  importOrder: [
-    '^model/(.*)$',
-    '^api/(.*)$',
-    '^utils/(.*)$',
-    '^components/(.*)$',
-    '^styles/(.*)$',
-    '^[./]',
-  ],
+  importOrder: ['^model/(.*)$', '^api/(.*)$', '^utils/(.*)$', '^components/(.*)$', '^[./]'],
   importOrderSeparation: true,
 };

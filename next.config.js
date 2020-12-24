@@ -3,6 +3,7 @@ const runtimeCaching = require('next-pwa/cache');
 
 module.exports = withPWA({
   target: 'serverless',
+  // distDir: 'build',
   compress: false,
   reactStrictMode: true,
   i18n: {
