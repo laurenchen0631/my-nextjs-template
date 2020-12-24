@@ -15,4 +15,12 @@ module.exports = withPWA({
     disable: process.env.NODE_ENV === 'development',
     runtimeCaching,
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/proxy/:path*',
+        destination: `${process.env.API_HOST}/:path*`,
+      },
+    ];
+  },
 });
