@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "./dev.sh",
     "build": "next build",
     "start": "next start",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx"
@@ -32,8 +32,10 @@
     "eslint-plugin-prettier": "^3.3.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "i18next": "^19.8.4",
     "postcss": "^8.2.1",
     "prettier": "^2.2.1",
+    "react-i18next": "^11.8.4",
     "typescript": "^4.1.3"
   }
 }

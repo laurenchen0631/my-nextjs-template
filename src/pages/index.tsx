@@ -2,7 +2,7 @@ import {getSortedPostsData, PostFile} from 'lib/posts';
 import {GetStaticProps} from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
-import styles from 'styles/Home.module.css';
+import {Trans} from 'react-i18next';
 import utilStyles from 'styles/utils.module.css';
 
 import Date from 'components/date';
@@ -18,6 +18,19 @@ export default function Home({allPostsData}: HomeProps): JSX.Element {
       <Head>
         <title>{siteTitle}</title>
       </Head>
+
+      <Link href="/" locale="zh">
+        <a className="m-2">繁體中文</a>
+      </Link>
+
+      <Link href="/" locale="en">
+        <a className="m-2">English</a>
+      </Link>
+
+      <h1>
+        <Trans i18nKey="welcomeMessage" />
+      </h1>
+
       <section className={utilStyles.headingMd}>
         <p>[Your Self Introduction]</p>
         <p>

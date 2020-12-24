@@ -30,9 +30,10 @@ export default function Post({postData}: PostProps): JSX.Element {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const paths = getAllPostIds();
+
   return {
     paths,
-    fallback: false,
+    fallback: true,
   };
 };
 

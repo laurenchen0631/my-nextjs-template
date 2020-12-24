@@ -10,7 +10,7 @@ module.exports = {
     '^api/(.*)$',
     '^utils/(.*)$',
     '^components/(.*)$',
-    '^assets/(.*)$',
+    '^styles/(.*)$',
     '^[./]',
   ],
   importOrderSeparation: true,

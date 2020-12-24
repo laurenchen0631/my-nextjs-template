@@ -11,4 +11,4 @@ function cleanup {
 trap cleanup EXIT;
 docker build -f Dockerfile.dev -t example-dev:$DATE .
 docker run --add-host="host:${ip}" -p 2000:80 -p 4000:443 -d --name example-dev example-dev:$DATE;
-yarn dev;
+yarn next dev;
