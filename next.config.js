@@ -10,6 +10,9 @@ module.exports = withPWA({
     locales: ['zh', 'cn', 'en'],
     defaultLocale: 'zh',
   },
+  images: {
+    domains: [process.env.CDN_DOMAIN],
+  },
   pwa: {
     dest: 'public',
     disable: process.env.NODE_ENV === 'development',
