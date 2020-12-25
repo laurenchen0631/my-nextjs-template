@@ -1,45 +1,20 @@
+import {HYDRATE, createWrapper} from 'next-redux-wrapper';
 import {useMemo} from 'react';
-import {createStore, applyMiddleware, Store, PreloadedState} from 'redux';
-import {composeWithDevTools} from 'redux-devtools-extension';
+import {createStore, applyMiddleware, Store, PreloadedState, Middleware} from 'redux';
 import thunkMiddleware from 'redux-thunk';
 
 import {rootReducer, RootActions, RootState, PreState} from './helper';
 
-let store: Store<RootState, RootActions> | undefined;
-
-function initStore(initialState: PreState) {
-  return createStore(
-    rootReducer,
-    initialState,
-    composeWithDevTools(applyMiddleware(thunkMiddleware)),
-  );
-}
-
-export const initializeStore = (preloadedState: PreState): Store<RootState, RootActions> => {
-  let _store = store ?? initStore(preloadedState);
-
-  // After navigating to a page with an initial Redux state, merge that state
-  // with the current state in the store, and create a new store
-  if (preloadedState && store) {
-    _store = initStore({
-      ...store.getState(),
-      ...preloadedState,
-    });
-    // Reset the current store
-    store = undefined;
+const bindMiddleware = (middleware: Middleware[]) => {
+  if (process.env.NODE_ENV !== 'production') {
+    const {composeWithDevTools} = require('redux-devtools-extension');
+    return composeWithDevTools(applyMiddleware(...middleware));
   }
-
-  // For SSG and SSR always create a new store
-  if (typeof window === 'undefined') {
-    return _store;
-  }
-  // Create the store once in the client
-  if (!store) store = _store;
-
-  return _store;
+  return applyMiddleware(...middleware);
 };
 
-export function useStore(initialState: PreState): Store<RootState, RootActions> {
-  const store = useMemo(() => initializeStore(initialState), [initialState]);
-  return store;
-}
+const initStore = () => {
+  return createStore(rootReducer, bindMiddleware([thunkMiddleware]));
+};
+
+export const wrapper = createWrapper<RootState, RootActions>(initStore);

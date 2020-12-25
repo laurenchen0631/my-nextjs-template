@@ -7,7 +7,7 @@ import {I18nextProvider, initReactI18next} from 'react-i18next';
 import {Provider} from 'react-redux';
 import 'styles/globals.css';
 
-import {useStore} from 'model/store';
+import {wrapper} from 'model/store';
 
 const resources = {
   en: {
@@ -25,8 +25,7 @@ i18n.use(initReactI18next).init({
   },
 });
 
-function MyApp({Component, pageProps}: AppProps): JSX.Element {
-  const store = useStore(pageProps.initialReduxState);
+function App({Component, pageProps}: AppProps): JSX.Element {
   const {locale} = useRouter();
   useMemo(() => {
     i18n.changeLanguage(locale ?? 'zh');
@@ -50,13 +49,11 @@ function MyApp({Component, pageProps}: AppProps): JSX.Element {
         <link rel="apple-touch-icon" href="/apple-icon.png"></link>
         <meta name="theme-color" content="#000000" />
       </Head>
-      <Provider store={store}>
-        <I18nextProvider i18n={i18n}>
-          <Component {...pageProps} />
-        </I18nextProvider>
-      </Provider>
+      <I18nextProvider i18n={i18n}>
+        <Component {...pageProps} />
+      </I18nextProvider>
     </>
   );
 }
 
-export default MyApp;
+export default wrapper.withRedux(App);

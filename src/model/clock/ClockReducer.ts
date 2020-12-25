@@ -1,3 +1,4 @@
+import {HYDRATE} from 'next-redux-wrapper';
 import {combineReducers} from 'redux';
 
 import {ClockModel, ClockActions} from 'model/clock/ClockTypes';
@@ -10,6 +11,8 @@ const initState: ClockModel.State = {
 
 function lastUpdate(state = initState.lastUpdate, action: RootActions) {
   switch (action.type) {
+    case HYDRATE:
+      return action.payload.clock.lastUpdate || state;
     case ClockActions.TICK:
       return action.payload.ts;
     default:
@@ -19,6 +22,8 @@ function lastUpdate(state = initState.lastUpdate, action: RootActions) {
 
 function light(state = initState.light, action: RootActions) {
   switch (action.type) {
+    case HYDRATE:
+      return false;
     case ClockActions.TICK:
       return action.payload.light;
     default:
@@ -26,7 +31,7 @@ function light(state = initState.light, action: RootActions) {
   }
 }
 
-export default combineReducers<ClockModel.State>({
+export default combineReducers<ClockModel.State, RootActions>({
   lastUpdate,
   light,
 });

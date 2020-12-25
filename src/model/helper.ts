@@ -1,3 +1,4 @@
+import {HYDRATE} from 'next-redux-wrapper';
 import {CombinedState, combineReducers, PreloadedState} from 'redux';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
@@ -16,7 +17,13 @@ export const rootReducer = combineReducers({
 
 export type RootState = ExtractState<ReturnType<typeof rootReducer>>;
 export type PreState = PreloadedState<RootState>;
-export type RootActions = CounterModel.ActionTypes | ClockModel.ActionTypes;
+export type RootActions =
+  | {
+      type: typeof HYDRATE;
+      payload: any;
+    }
+  | CounterModel.ActionTypes
+  | ClockModel.ActionTypes;
 
 export type AppThunk<ReturnType> = ThunkAction<ReturnType, RootState, unknown, RootActions>;
 export type AppDispatch = ThunkDispatch<RootState, unknown, RootActions>;

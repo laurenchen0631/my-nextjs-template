@@ -1,3 +1,4 @@
+import {HYDRATE} from 'next-redux-wrapper';
 import {combineReducers} from 'redux';
 
 import {RootActions} from 'model/helper';
@@ -21,6 +22,6 @@ function counter(state = initState.counter, action: RootActions) {
   }
 }
 
-export default combineReducers<CounterModel.State>({
+export default combineReducers<CounterModel.State, RootActions>({
   counter,
 });

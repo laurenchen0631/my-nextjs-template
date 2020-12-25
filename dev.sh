@@ -6,9 +6,17 @@ function cleanup {
   docker stop example-dev
   docker rm example-dev
   docker rmi example-dev:$DATE 
+  echo ""
 }
 
+PORT=$(grep PORT .env.local | xargs)
+PORT=${PORT#*=}
+PORT=${PORT:-3000}
+HTTP_PORT=$(($PORT - 1000))
+HTTPS_PORT=$(($PORT + 1000))
+
 trap cleanup EXIT;
+
 docker build -f Dockerfile.dev -t example-dev:$DATE .
-docker run --add-host="host:${ip}" -p 2000:80 -p 4000:443 -d --name example-dev example-dev:$DATE;
-yarn next dev;
+docker run --add-host="host:${ip}" -p ${HTTP_PORT}:80 -p ${HTTPS_PORT}:443 -d --name example-dev example-dev:$DATE
+yarn next dev -p ${PORT}

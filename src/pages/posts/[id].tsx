@@ -7,6 +7,7 @@ import utilStyles from 'styles/utils.module.css';
 
 import {tick} from 'model/clock/ClockAction';
 import {AppDispatch, PreState} from 'model/helper';
+import {wrapper} from 'model/store';
 
 import Clock from 'components/clock';
 import DateComponent from 'components/date';
@@ -51,18 +52,13 @@ export const getStaticPaths: GetStaticPaths = async () => {
   };
 };
 
-export const getStaticProps: GetStaticProps = async ({params}) => {
+export const getStaticProps = wrapper.getStaticProps(async ({store, params}) => {
   const postData = await getPostData(params?.id as string);
+  (store.dispatch as AppDispatch)(tick());
 
   return {
     props: {
       postData,
-      initialReduxState: {
-        clock: {
-          lastUpdate: Date.now(),
-          light: false,
-        },
-      } as PreState,
     },
   };
-};
+});
