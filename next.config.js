@@ -23,6 +23,7 @@ module.exports = withPWA({
       {
         source: '/api/proxy/:path*',
         destination: `${process.env.API_HOST}/:path*`,
+        locale: false,
       },
     ];
   },

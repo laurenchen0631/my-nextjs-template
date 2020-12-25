@@ -5,6 +5,7 @@ import Link from 'next/link';
 import {Trans} from 'react-i18next';
 import utilStyles from 'styles/utils.module.css';
 
+import Counter from 'components/counter';
 import Date from 'components/date';
 import Layout, {siteTitle} from 'components/layout';
 
@@ -30,6 +31,8 @@ export default function Home({allPostsData}: HomeProps): JSX.Element {
       <h1>
         <Trans i18nKey="welcomeMessage" />
       </h1>
+
+      <Counter />
 
       <section className={utilStyles.headingMd}>
         <p>[Your Self Introduction]</p>

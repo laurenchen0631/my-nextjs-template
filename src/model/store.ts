@@ -3,11 +3,11 @@ import {createStore, applyMiddleware, Store, PreloadedState} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import thunkMiddleware from 'redux-thunk';
 
-import {rootReducer, RootActions, RootState} from './helper';
+import {rootReducer, RootActions, RootState, PreState} from './helper';
 
 let store: Store<RootState, RootActions> | undefined;
 
-function initStore(initialState: PreloadedState<RootState>) {
+function initStore(initialState: PreState) {
   return createStore(
     rootReducer,
     initialState,
@@ -15,9 +15,7 @@ function initStore(initialState: PreloadedState<RootState>) {
   );
 }
 
-export const initializeStore = (
-  preloadedState: PreloadedState<RootState>,
-): Store<RootState, RootActions> => {
+export const initializeStore = (preloadedState: PreState): Store<RootState, RootActions> => {
   let _store = store ?? initStore(preloadedState);
 
   // After navigating to a page with an initial Redux state, merge that state
@@ -32,14 +30,16 @@ export const initializeStore = (
   }
 
   // For SSG and SSR always create a new store
-  if (typeof window === 'undefined') return _store;
+  if (typeof window === 'undefined') {
+    return _store;
+  }
   // Create the store once in the client
   if (!store) store = _store;
 
   return _store;
 };
 
-export function useStore(initialState: PreloadedState<RootState>): Store<RootState, RootActions> {
+export function useStore(initialState: PreState): Store<RootState, RootActions> {
   const store = useMemo(() => initializeStore(initialState), [initialState]);
   return store;
 }

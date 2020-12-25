@@ -1,28 +1,42 @@
+import useInterval from 'lib/hook';
 import {getAllPostIds, getPostData, PostFile} from 'lib/posts';
 import {GetStaticPaths, GetStaticProps} from 'next';
 import Head from 'next/head';
+import {useDispatch} from 'react-redux';
 import utilStyles from 'styles/utils.module.css';
 
-import Date from 'components/date';
+import {tick} from 'model/clock/ClockAction';
+import {AppDispatch, PreState} from 'model/helper';
+
+import Clock from 'components/clock';
+import DateComponent from 'components/date';
 import Layout from 'components/layout';
 
 interface PostProps {
-  postData: PostFile;
+  postData?: PostFile;
 }
 
 export default function Post({postData}: PostProps): JSX.Element {
+  const dispatch = useDispatch<AppDispatch>();
+
+  // Tick the time every second
+  useInterval(() => {
+    dispatch(tick());
+  }, 1000);
+
   return (
     <Layout>
       <Head>
-        <title>{postData.title}</title>
+        <title>{postData?.title}</title>
       </Head>
+      <Clock />
 
       <article>
-        <h1 className={utilStyles.headingXl}>{postData.title}</h1>
+        <h1 className={utilStyles.headingXl}>{postData?.title}</h1>
         <div className={utilStyles.lightText}>
-          <Date dateString={postData.date} />
+          <DateComponent dateString={postData?.date ?? ''} />
         </div>
-        <div dangerouslySetInnerHTML={{__html: postData.contentHtml ?? ''}} />
+        <div dangerouslySetInnerHTML={{__html: postData?.contentHtml ?? ''}} />
       </article>
     </Layout>
   );
@@ -39,9 +53,16 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
   const postData = await getPostData(params?.id as string);
+
   return {
     props: {
       postData,
+      initialReduxState: {
+        clock: {
+          lastUpdate: Date.now(),
+          light: false,
+        },
+      } as PreState,
     },
   };
 };
