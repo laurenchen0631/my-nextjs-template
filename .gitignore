@@ -44,3 +44,8 @@ yarn-error.log*
 nginx/dev.conf
 nginx/proxy.conf
 *.pem
+
+## Test
+cypress.env.json
+cypress/screenshotsFolder
+cypress/videosFolder
