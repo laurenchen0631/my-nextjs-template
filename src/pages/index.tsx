@@ -1,5 +1,6 @@
 import {getSortedPostsData, PostFile} from 'lib/posts';
 import {GetStaticProps} from 'next';
+import getConfig from 'next/config';
 import Head from 'next/head';
 import Link from 'next/link';
 import {Trans} from 'react-i18next';
@@ -13,12 +14,18 @@ interface HomeProps {
   allPostsData: PostFile[];
 }
 
+const {serverRuntimeConfig} = getConfig();
+
+console.log(serverRuntimeConfig);
+
 export default function Home({allPostsData}: HomeProps): JSX.Element {
   return (
     <Layout home>
       <Head>
         <title>{siteTitle}</title>
       </Head>
+
+      {process.env.NEXT_PUBLIC_ANALYTICS_ID}
 
       <Link href="/" locale="zh">
         <a className="m-2">繁體中文</a>
@@ -63,7 +70,7 @@ export default function Home({allPostsData}: HomeProps): JSX.Element {
   );
 }
 
-export const getStaticProps: GetStaticProps = async (ctx) => {
+export const getStaticProps: GetStaticProps<HomeProps> = async (ctx) => {
   const allPostsData = getSortedPostsData();
   return {
     props: {

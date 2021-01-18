@@ -2,7 +2,7 @@ const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
 
 module.exports = withPWA({
-  target: 'serverless',
+  // target: 'serverless',
   // distDir: 'build',
   compress: false,
   reactStrictMode: true,
@@ -10,6 +10,9 @@ module.exports = withPWA({
     locales: ['zh', 'cn', 'en'],
     defaultLocale: 'zh',
   },
+  // serverRuntimeConfig: {
+  //   analyticsId: process.env.NEXT_PUBLIC_ANALYTICS_ID,
+  // },
   images: {
     domains: [process.env.CDN_DOMAIN],
   },
