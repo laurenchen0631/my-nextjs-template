@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
     "cy": "cypress open",
-    "test": "jest"
+    "test": "jest --coverage"
   },
   "dependencies": {
     "dayjs": "^1.9.7",
@@ -28,7 +28,6 @@
     "tailwindcss": "^2.0.2"
   },
   "devDependencies": {
-    "@testing-library/dom": "^7.29.4",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.3",
     "@testing-library/user-event": "^12.6.0",

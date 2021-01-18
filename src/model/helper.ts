@@ -1,4 +1,5 @@
 import {HYDRATE} from 'next-redux-wrapper';
+import {useDispatch as _useDispatch} from 'react-redux';
 import {CombinedState, combineReducers, PreloadedState} from 'redux';
 import {ThunkAction, ThunkDispatch} from 'redux-thunk';
 
@@ -27,3 +28,7 @@ export type RootActions =
 
 export type AppThunk<ReturnType> = ThunkAction<ReturnType, RootState, unknown, RootActions>;
 export type AppDispatch = ThunkDispatch<RootState, unknown, RootActions>;
+
+export function useDispatch(): AppDispatch {
+  return _useDispatch<AppDispatch>();
+}

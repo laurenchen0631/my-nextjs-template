@@ -1,12 +1,12 @@
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 
 import {decrementCount, incrementCount, resetCount} from 'model/counter/CounterAction';
 import {getCounter} from 'model/counter/CounterSelector';
-import {AppDispatch} from 'model/helper';
+import {useDispatch} from 'model/helper';
 
 function Counter(): JSX.Element {
   const count = useSelector(getCounter);
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
 
   return (
     <div>

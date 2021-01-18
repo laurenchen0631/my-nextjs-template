@@ -1,12 +1,11 @@
 import useInterval from 'lib/hook';
 import {getAllPostIds, getPostData, PostFile} from 'lib/posts';
-import {GetStaticPaths, GetStaticProps} from 'next';
+import {GetStaticPaths} from 'next';
 import Head from 'next/head';
-import {useDispatch} from 'react-redux';
 import utilStyles from 'styles/utils.module.css';
 
 import {tick} from 'model/clock/ClockAction';
-import {AppDispatch, PreState} from 'model/helper';
+import {AppDispatch, useDispatch} from 'model/helper';
 import {wrapper} from 'model/store';
 
 import Clock from 'components/clock';
@@ -18,7 +17,7 @@ interface PostProps {
 }
 
 export default function Post({postData}: PostProps): JSX.Element {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
 
   // Tick the time every second
   useInterval(() => {

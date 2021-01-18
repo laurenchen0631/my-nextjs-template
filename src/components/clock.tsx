@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import {getCurrentTime, isLight} from 'model/clock/ClockSelector';
 
 const formatTime = (time: number) => {
-  return new Date(time).toJSON().slice(11, 19);
+  return new Date(time).toTimeString().slice(0, 8);
 };
 
 const Clock = (): JSX.Element => {
@@ -11,7 +11,7 @@ const Clock = (): JSX.Element => {
   const light = useSelector(isLight);
 
   return (
-    <div className={light ? 'light' : ''}>
+    <div className={light ? 'light' : ''} data-testid="time">
       {formatTime(lastUpdate)}
       <style jsx>{`
         div {

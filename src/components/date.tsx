@@ -6,5 +6,9 @@ interface DateProps {
 
 export default function Date({dateString}: DateProps): JSX.Element {
   const date = dayjs(dateString);
-  return <time dateTime={dateString}>{date.format('MMMM D, YYYY')}</time>;
+  return (
+    <time dateTime={dateString} data-testid="datetime">
+      {date.format('MMMM D, YYYY')}
+    </time>
+  );
 }
