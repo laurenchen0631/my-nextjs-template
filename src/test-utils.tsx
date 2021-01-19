@@ -43,6 +43,7 @@ function customRender(ui: ReactElement, options?: CustomRenderOptions): RenderRe
 }
 
 export * from '@testing-library/react';
-
 // override render method
 export {customRender as render};
+
+export {default as userEvent} from '@testing-library/user-event';

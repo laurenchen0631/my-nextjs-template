@@ -27,6 +27,9 @@ module.exports = {
     'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
     'prettier/@typescript-eslint',
+    'plugin:jest/recommended',
+    'plugin:testing-library/recommended',
+    'plugin:testing-library/react',
   ],
   rules: {
     'prettier/prettier': ['error', {}, {usePrettierrc: true}], // Use our .prettierrc file as source
