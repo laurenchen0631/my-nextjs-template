@@ -70,7 +70,7 @@ export default function Home({allPostsData}: HomeProps): JSX.Element {
   );
 }
 
-export const getStaticProps: GetStaticProps<HomeProps> = async (ctx) => {
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const allPostsData = getSortedPostsData();
   return {
     props: {

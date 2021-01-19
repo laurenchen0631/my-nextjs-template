@@ -47,3 +47,6 @@ export * from '@testing-library/react';
 export {customRender as render};
 
 export {default as userEvent} from '@testing-library/user-event';
+
+export {rest} from 'msw';
+export {setupServer} from 'msw/node';

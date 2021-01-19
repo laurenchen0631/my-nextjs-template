@@ -4,7 +4,6 @@ import {useRouter} from 'next/dist/client/router';
 import Head from 'next/head';
 import {useMemo} from 'react';
 import {I18nextProvider, initReactI18next} from 'react-i18next';
-import {Provider} from 'react-redux';
 import 'styles/globals.css';
 
 import {wrapper} from 'model/store';

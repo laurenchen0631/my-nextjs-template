@@ -1,4 +1,4 @@
-import {HYDRATE} from 'next-redux-wrapper';
+// import {HYDRATE} from 'next-redux-wrapper';
 import {combineReducers} from 'redux';
 
 import {RootActions} from 'model/helper';
