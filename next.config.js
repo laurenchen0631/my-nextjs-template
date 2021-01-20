@@ -1,7 +1,8 @@
 const withPWA = require('next-pwa');
 const runtimeCaching = require('next-pwa/cache');
+const bundleAnalyzer = require('@next/bundle-analyzer');
 
-module.exports = withPWA({
+const config = withPWA({
   // target: 'serverless',
   // distDir: 'build',
   compress: false,
@@ -31,3 +32,5 @@ module.exports = withPWA({
     ];
   },
 });
+
+module.exports = bundleAnalyzer({enabled: process.env.ANALYZE === 'true'})(config);

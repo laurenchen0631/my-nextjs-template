@@ -11,6 +11,7 @@
     "test": "npm run lint && jest --coverage"
   },
   "dependencies": {
+    "@next/bundle-analyzer": "^10.0.5",
     "dayjs": "^1.9.7",
     "gray-matter": "^4.0.2",
     "next": "10.0.3",
